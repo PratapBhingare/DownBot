@@ -73,10 +73,7 @@ export async function handleMessage(req, res, next) {
     })}\n\n`);
 
     let aiChunk = null;
-    for await (const [chunk] of stream) {
-
-        console.log(chunk);
-
+    for await (const chunk of stream) {
         if (aiChunk == null) {
             aiChunk = chunk;
         } else {
