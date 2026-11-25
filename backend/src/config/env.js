@@ -27,5 +27,6 @@ export const env = Object.freeze({
   mongoUri: process.env.MONGODB_URI,
   accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
   refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
-  groqApiKey:process.env.GROQ_API_KEY,  
+  groqApiKey:process.env.GROQ_API_KEY,
+  COHERE_API_KEY:process.env.COHERE_API_KEY  
 });
