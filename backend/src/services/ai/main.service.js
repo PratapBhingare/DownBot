@@ -1,16 +1,9 @@
-import { env } from '../../config/env.js';
-import { ChatCohere } from "@langchain/cohere"
-import { CohereClientV2 } from "cohere-ai"
+import { ChatGroq } from "@langchain/groq"
+import { env } from "../../config/env.js"
 
-
-const cohereClient = new CohereClientV2({
-    token: env.COHERE_API_KEY
+const model = new ChatGroq({
+    model: "openai/gpt-oss-120b",
+    apiKey: env.groqApiKey
 })
 
-const model = new ChatCohere({
-    model: "command-a-05-2026",
-    client: cohereClient
-});
-
-
-export default model;
+export default model

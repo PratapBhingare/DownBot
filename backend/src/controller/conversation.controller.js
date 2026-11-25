@@ -55,7 +55,7 @@ export async function handleMessage(req, res, next) {
         conversation: conversation._id
     })
 
-   
+
 
 
     const stream = await model.stream(messages);
@@ -73,7 +73,7 @@ export async function handleMessage(req, res, next) {
     })}\n\n`);
 
     let aiChunk = null;
-    for await (const [ chunk ] of stream) {
+    for await (const [chunk] of stream) {
 
         console.log(chunk);
 
