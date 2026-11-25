@@ -11,8 +11,6 @@ export const requireAuth = asyncHandler(async (req, _res, next) => {
   const match = /^Bearer ([^\s]+)$/i.exec(req.headers.authorization || '');
   if (!match) throw new AppError(401, 'Authentication required');
   const payload = verifyAccessToken(match[1]);
-  const user = await findUserById(payload.id);
-  if (!user) throw new AppError(401, 'Authentication required');
-  req.user = user;
+  req.user = payload;
   next();
 });

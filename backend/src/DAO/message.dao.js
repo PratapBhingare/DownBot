@@ -5,7 +5,7 @@ import { MessageModel } from '../models/message.model.js';
  * @returns {Promise<import('../types/conversation.js').Message>} Persisted message.
  */
 export async function createMessage(input) {
-    return MessageModel.create(input);
+  return MessageModel.create(input);
 }
 
 /**
@@ -14,5 +14,5 @@ export async function createMessage(input) {
  * @returns {Promise<import('../types/conversation.js').Message[]>} Messages in chronological order.
  */
 export async function findMessagesByConversation(conversationId) {
-    return MessageModel.find({ conversation: conversationId });
+  return MessageModel.find({ conversation: conversationId });
 }
