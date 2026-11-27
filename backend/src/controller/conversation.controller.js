@@ -99,3 +99,26 @@ export async function getAllConversations(req, res) {
     const conversations = await findConversationsByUser(user.id);
     return sendSuccess(res, 200, 'Conversations fetch successfully', { conversations });
 }
+
+
+/**
+ * @GET
+ * @route /api/v1/conversation/messages/:conversationId
+ * @desc get all messages of a specific conversation
+ */
+export async function getMessagesByConversation(req, res, next) {
+    const { conversationId } = req.params;
+    const user = req.user;
+
+    //––––––––––––––––––––– check ownership of the conversation –––––––––––––––––––––
+    const conversation = await findConversationByIdAndUser(conversationId, user.id);
+
+    if (!conversation) {
+        return next(new AppError(404, 'Conversation not found'));
+    }
+
+    const messages = (await findMessagesByConversation(conversation.id))
+    // .filter(message => message.role !== "tool")
+
+    return sendSuccess(res, 200, 'Messages fetched successfully', { messages });
+}

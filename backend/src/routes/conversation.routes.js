@@ -2,7 +2,7 @@ import { Router } from "express";
 import { requireAuth } from "../middleware/auth.middleware.js";
 import { validate } from "../middleware/validate.middleware.js";
 import { sendMessageValidator } from "../validators/conversation.validator.js";
-import { getAllConversations, handleMessage } from "../controller/conversation.controller.js";
+import { getAllConversations, handleMessage ,getMessagesByConversation} from "../controller/conversation.controller.js";
 
 const router = Router();
 
@@ -22,5 +22,14 @@ router.post("/", requireAuth, sendMessageValidator, validate, handleMessage);
  * @desc get all the conversation of the user
  */
 router.get("/", requireAuth, getAllConversations);
+
+
+/**
+ * @GET
+ * @route /api/v1/conversation/messages/:conversationId
+ * @desc get all messages of a specific conversation
+ */
+router.get("/messages/:conversationId", requireAuth, getMessagesByConversation);
+
 
 export default router;
