@@ -2,7 +2,7 @@ import { env } from '../config/env.js';
 import { AppError } from '../utils/AppError.js';
 import { sendSuccess } from '../utils/apiResponse.js';
 import { generateTitle } from '../services/ai/ai-title.service.js';
-import { createConversation, findConversationByIdAndUser } from '../DAO/conversation.dao.js';
+import { createConversation, findConversationByIdAndUser, findConversationsByUser } from '../DAO/conversation.dao.js';
 import { findMessagesByConversation, createMessage } from '../DAO/message.dao.js';
 import model from "../services/ai/main.service.js";
 import { HumanMessage, AIMessage, SystemMessage } from 'langchain';
@@ -87,4 +87,15 @@ export async function handleMessage(req, res, next) {
     res.end();
 
 
+}
+
+/**
+ * @GET
+ * @route /api/v1/conversation/
+ * @desc get all the conversation of the user
+ */
+export async function getAllConversations(req, res) {
+    const user = req.user;
+    const conversations = await findConversationsByUser(user.id);
+    return sendSuccess(res, 200, 'Conversations fetch successfully', { conversations });
 }

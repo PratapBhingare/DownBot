@@ -16,4 +16,11 @@ const router = Router();
  */
 router.post("/", requireAuth, sendMessageValidator, validate, handleMessage);
 
+/**
+ * @GET
+ * @route /api/v1/conversation/
+ * @desc get all the conversation of the user
+ */
+router.get("/", requireAuth, getAllConversations);
+
 export default router;
